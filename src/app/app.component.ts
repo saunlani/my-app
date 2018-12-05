@@ -91,9 +91,9 @@ export class AppComponent {
     dataAdapter: any = new jqx.dataAdapter(this.source);
     columns: any[] = [
         { text: 'Tenant Name', dataField: 'TenantTaxnmyName', width: "90%" },
-        { text: 'Root Domain', dataField: 'RootDomain'}
-        { text: 'Effective Start Date', dataField: 'EfctvStartDt'}
-        { text: 'Effective End Date', dataField: 'EfctvEndDt'}
+        { text: 'Root Domain', dataField: 'RootDomain'},
+        { text: 'Effective Start Date', dataField: 'EfctvStartDt'},
+        { text: 'Effective End Date', dataField: 'EfctvEndDt'},
         {
             text: 'Details', columntype: 'button', editable: false, sortable: false, filterable: false, width: "10%", align: "center",
 
