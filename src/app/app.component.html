@@ -1,0 +1,130 @@
+<div class="topnav">
+        Tenant Administration
+      </div>
+      <div> <button class="deleteButton" 
+          style="cursor: pointer; 
+          text-indent: -3.5px; 
+          border-radius: 50%; 
+          background-color: white; 
+          color: black; 
+          height: 17px; 
+          width: 17px;
+          line-height: .1; 
+          font-size: 12px; "
+          (click) ="delete()">
+          X</button>
+          
+          <button class="addAccountButton" 
+               style="cursor: pointer; 
+               text-indent: -3.5px; 
+               border-radius: 50%; 
+               background-color: white; 
+               color: black; 
+               height: 17px; 
+               width: 17px;
+               line-height: .1; 
+               font-size: 12px;"
+               (click)="addAccountClick(event)">
+               +</button>
+
+               <button class="addTenantButton" 
+               style="cursor: pointer; 
+               text-indent: -3.5px; 
+               border-radius: 50%; 
+               background-color: white; 
+               color: black; 
+               height: 17px; 
+               width: 17px;
+               line-height: .1; 
+               font-size: 12px;"
+               (click)="addTenantClick(event)">
+               &</button>
+               
+               <button class="editButton" 
+                    style="cursor: pointer; 
+                    text-indent: -3.5px; 
+                    border-radius: 50%; 
+                    background-color: white; 
+                    color: black; 
+                    height: 17px; 
+                    width: 17px;
+                    line-height: .1; 
+                    font-size: 12px;"
+                    (click) ="editClick(event)">
+                    E</button>
+                    </div>
+                    
+<jqxTreeGrid #myTreeGrid
+(onRowSelect)="RowSelect($event)"
+name="filterValue" 
+id="filterValue" 
+ngDefaultControl
+pageSize=20
+(onFilter)="filter($event)"
+[(ngModel)]="filterValue"
+[filterable]="true"
+[autoRowHeight]="true"
+[theme]="'tree-grid'"
+[toolbarHeight]="20"
+(onRowClick)="rowClick($event)"
+[width]="'100%'"
+[source]="dataAdapter"
+[pageable]="true"
+[sortable]="true"
+[columns]="columns"
+[icons]="true"
+[rendered]="rendered">
+</jqxTreeGrid>
+
+
+<!-- dialog/form for editing -->
+<div id="editModal" class="modal"></div>
+<dialog id="editDialog">
+          <div class="modalHeader">
+                    Edit Tenant Basic Information
+                  </div>
+     <form (submit)="submitEdit()">
+     TenantTaxnmyName: <br><input type="text" id="tenantName" value={{nodeTenantName}}> <br>
+     Effective Start Date: <br><input type="text" id="startDate" value={{nodeEffectiveStart}}> <br>
+     Effective End Date: <br><input type="text" id="endDate" value={{nodeEffectiveEnd}}> <br>
+     Root Domain URL: <br><input type="text" id="rootDomain" value={{nodeRootDomain}}> <br> 
+     <button style="float: right;">Submit</button> 
+</form>
+<button style="float: right;" onclick="editDialog.close()">Cancel</button>
+</dialog>
+
+<!-- dialog/form for adding a new account(child add) !-->
+
+<div id="addAccountModal" class="modal"></div>
+
+<dialog id="addAccountDialog">
+          <div class="modalHeader">
+                    Add Account
+                  </div>
+     <form (submit)="submitAccountAdd()">
+     TenantTaxnmyName: <br><input type="text" id="tenantName1"> <br>
+     Effective Start Date: <br><input type="text" id="startDate1"> <br>
+     Effective End Date: <br><input type="text" id="endDate1"> <br>
+     Root Domain URL: <br><input type="text" id="rootDomain1"> <br> 
+     <button style="float: right;">Submit</button> 
+</form>
+<button style="float: right;" onclick="addAccountDialog.close()">Cancel</button>
+</dialog>
+
+
+<!-- dialog/form for adding a new tenant(sibling add) -->
+<div id="addTenantModal" class="modal"></div>
+
+<dialog id="addTenantDialog">
+          <div class="modalHeader">
+                    Add Tenant
+                  </div>
+     <form (submit)="submitTenantAdd()">
+     TenantTaxnmyName: <br><input type="text" id="tenantName2"> <br>
+     Effective Start Date: <br><input type="text" id="startDate2"> <br>
+     Effective End Date: <br><input type="text" id="endDate2"> <br>
+     Root Domain URL: <br><input type="text" id="rootDomain2"> <br> 
+     <button style="float: right;">Submit</button> 
+</form>
+<button style="float: right;" onclick="addTenantDialog.close()">Cancel</button>
+</dialog>
