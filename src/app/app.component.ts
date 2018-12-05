@@ -39,6 +39,10 @@ export class AppComponent {
         this.expandThisKey = this.expandThisKey.replace(/[^A-Za-z0-9]/g, '');
         this.expandTheseKeys.push(this.expandThisKey);
         this.myTreeGrid.expandRow(this.expandTheseKeys);
+        this.myTreeGrid.hideColumn('RootDomain');
+        this.myTreeGrid.hideColumn('EfctvStartDt');
+        this.myTreeGrid.hideColumn('EfctvEndDt');
+
     }
 
     filter(event: any): void {
@@ -71,7 +75,10 @@ export class AppComponent {
             datafields: [
                 { name: 'daTableRowId', type: 'string' },
                 { name: 'TenantTaxnmyName', type: 'string' },
-                { name: 'children', type: 'array' },
+                { name: 'RootDomain', type: 'string' },
+                { name: 'EfctvStartDt', type: 'string' },
+                { name: 'EfctvEndDt', type: 'string' },
+                { name: 'children', type: 'array' }
             ],
             hierarchy:
             {
@@ -84,6 +91,9 @@ export class AppComponent {
     dataAdapter: any = new jqx.dataAdapter(this.source);
     columns: any[] = [
         { text: 'Tenant Name', dataField: 'TenantTaxnmyName', width: "90%" },
+        { text: 'Root Domain', dataField: 'RootDomain'}
+        { text: 'Effective Start Date', dataField: 'EfctvStartDt'}
+        { text: 'Effective End Date', dataField: 'EfctvEndDt'}
         {
             text: 'Details', columntype: 'button', editable: false, sortable: false, filterable: false, width: "10%", align: "center",
 
@@ -138,7 +148,7 @@ export class AppComponent {
         let startDate: string = (<HTMLInputElement>document.getElementById("startDate")).value;
         let endDate: string = (<HTMLInputElement>document.getElementById("endDate")).value;
         let rootDomain: string = (<HTMLInputElement>document.getElementById("rootDomain")).value;
-        this.myTreeGrid.updateRow(this.selectedNode.daTableRowId.toString().replace(/[^A-Za-z0-9]/g, ''), { TenantTaxnmyName: tenantName, startDate: startDate, endDate: endDate, rootDomain: rootDomain });
+        this.myTreeGrid.updateRow(this.selectedNode.daTableRowId.toString().replace(/[^A-Za-z0-9]/g, ''), { 'RootDomain': rootDomain , 'TenantTaxnmyName': tenantName, 'EfctvStartDt': startDate, 'EfctvEndDt': endDate });
         let editDialog: any = <any>document.getElementById("editDialog");
         editDialog.close();
     }
