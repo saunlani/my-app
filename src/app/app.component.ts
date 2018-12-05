@@ -1,7 +1,9 @@
-import { Component, ViewChild, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, ViewChild, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { jqxTreeGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtreegrid';
 import { TREE_DATA } from './tree-data';
 import { isArray } from 'util';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 @Component({
     selector: 'app-root',
@@ -12,6 +14,7 @@ import { isArray } from 'util';
 
 export class AppComponent {
     @ViewChild('myTreeGrid') myTreeGrid: jqxTreeGridComponent;
+    constructor(public dialog: MatDialog) {}
 
     height: number = 25;
     data = TREE_DATA;
@@ -33,6 +36,18 @@ export class AppComponent {
 
     //user created counter
     userCreatedNodeCount: number = 0;
+
+    openDialog(): void {
+        let dialogRef = this.dialog.open(AddDialogComponent,{
+        });
+        
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+
+
 
     ngAfterViewInit(): void {
         this.expandThisKey = 'AAAAAAAJGMU';
@@ -91,9 +106,9 @@ export class AppComponent {
     dataAdapter: any = new jqx.dataAdapter(this.source);
     columns: any[] = [
         { text: 'Tenant Name', dataField: 'TenantTaxnmyName', width: "90%" },
-        { text: 'Root Domain', dataField: 'RootDomain'},
-        { text: 'Effective Start Date', dataField: 'EfctvStartDt'},
-        { text: 'Effective End Date', dataField: 'EfctvEndDt'},
+        { text: 'Root Domain', dataField: 'RootDomain' },
+        { text: 'Effective Start Date', dataField: 'EfctvStartDt' },
+        { text: 'Effective End Date', dataField: 'EfctvEndDt' },
         {
             text: 'Details', columntype: 'button', editable: false, sortable: false, filterable: false, width: "10%", align: "center",
 
@@ -148,7 +163,7 @@ export class AppComponent {
         let startDate: string = (<HTMLInputElement>document.getElementById("startDate")).value;
         let endDate: string = (<HTMLInputElement>document.getElementById("endDate")).value;
         let rootDomain: string = (<HTMLInputElement>document.getElementById("rootDomain")).value;
-        this.myTreeGrid.updateRow(this.selectedNode.daTableRowId.toString().replace(/[^A-Za-z0-9]/g, ''), { 'RootDomain': rootDomain , 'TenantTaxnmyName': tenantName, 'EfctvStartDt': startDate, 'EfctvEndDt': endDate });
+        this.myTreeGrid.updateRow(this.selectedNode.daTableRowId.toString().replace(/[^A-Za-z0-9]/g, ''), { 'RootDomain': rootDomain, 'TenantTaxnmyName': tenantName, 'EfctvStartDt': startDate, 'EfctvEndDt': endDate });
         let editDialog: any = <any>document.getElementById("editDialog");
         editDialog.close();
     }
@@ -203,5 +218,3 @@ export class AppComponent {
         return 700;
     }
 }
-
-// let myDialog:any = <any>document.getElementById("myDialog");

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-basic-form',
+  selector: 'basic-form',
   templateUrl: './basic-form.component.html',
   styleUrls: ['./basic-form.component.css']
 })

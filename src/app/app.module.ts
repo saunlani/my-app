@@ -9,6 +9,7 @@ import { jqxTreeGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqx
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatDialogModule } from "@angular/material";
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,16 +18,19 @@ import { MatChipsModule } from '@angular/material/chips';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { NestedFormComponent } from './nested-form/nested-form.component';
 import { ValidFormComponent } from './valid-form/valid-form.component';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent, jqxGridComponent, jqxTreeGridComponent, 
-    BasicFormComponent, NestedFormComponent, ValidFormComponent,
+    BasicFormComponent, NestedFormComponent, ValidFormComponent, AddDialogComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule,
     ReactiveFormsModule, MatInputModule, MatSelectModule,
-    MatButtonModule, MatCheckboxModule, MatChipsModule
+    MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule
+  ],
+  entryComponents: [ AddDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

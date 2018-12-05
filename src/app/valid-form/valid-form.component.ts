@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-valid-form',
+  selector: 'valid-form',
   templateUrl: './valid-form.component.html',
   styleUrls: ['./valid-form.component.css']
 })
