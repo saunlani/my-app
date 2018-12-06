@@ -4,6 +4,7 @@ import { TREE_DATA } from './tree-data';
 import { isArray } from 'util';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { DataService } from './services/data.service';
 
 @Component({
     selector: 'app-root',
@@ -14,10 +15,10 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 export class AppComponent {
     @ViewChild('myTreeGrid') myTreeGrid: jqxTreeGridComponent;
-    constructor(public dialog: MatDialog) {}
+    constructor(public dialog: MatDialog, private data: DataService) { }
 
     height: number = 25;
-    data = TREE_DATA;
+    treedata = TREE_DATA;
     filterValue: any;
     expandThisKey: string;
     expandTheseKeys: any[] = [];
@@ -37,17 +38,28 @@ export class AppComponent {
     //user created counter
     userCreatedNodeCount: number = 0;
 
-    openDialog(): void {
-        let dialogRef = this.dialog.open(AddDialogComponent,{
+    addHeaderTitle: string;
+
+    header: string;
+
+
+    openAddDialog(accountOrTenant): void {
+        this.newHeader(accountOrTenant);
+        let dialogRef = this.dialog.open(AddDialogComponent, {
         });
         
-    
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
+            console.log('The dialog was closed');
         });
-      }
+    }
 
+    ngOnInit() {
+        this.data.currentHeader.subscribe(header => this.header = header)
+    }
 
+    newHeader(accountOrTenant) {
+        this.data.changeHeader(accountOrTenant);
+    }
 
     ngAfterViewInit(): void {
         this.expandThisKey = 'AAAAAAAJGMU';
@@ -100,7 +112,7 @@ export class AppComponent {
                 root: "children"
             },
             id: 'daTableRowId',
-            localData: this.data
+            localData: this.treedata
         };
 
     dataAdapter: any = new jqx.dataAdapter(this.source);

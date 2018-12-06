@@ -1,46 +1,60 @@
-<form [formGroup]="myForm">
+<h2 mat-dialog-title ="black">{{ header }}</h2>
 
-    <hr>
+<mat-dialog-content>
+    <form [formGroup]="addForm">
 
-    <mat-form-field class="full">
-        <input matInput placeholder="email" formControlName="email">
-    </mat-form-field>
-
-    <h4>Cell Phone</h4>
-
-    <div formGroupName="cellPhone">
-
-        <mat-form-field class="xs">
-            <input matInput placeholder="area" formControlName="area">
+        <mat-form-field>
+            <input matInput placeholder="Tenant Name" formControlName="tenantName" autocomplete="tenantName">
+            <!-- <mat-error *ngIf="email.invalid && email.touched">
+                Your email does not look right
+            </mat-error> -->
         </mat-form-field>
+        <br>
 
-        <mat-form-field class="xs">
-            <input matInput placeholder="prefix" formControlName="prefix">
+        <mat-form-field>
+                <input matInput 
+                [formControl]="startDate"
+                [matDatepicker]="startPicker" 
+                name="startDate" 
+                placeholder="Effective Start Date"/>
+              
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>               
+                <mat-datepicker #startPicker></mat-datepicker>
+              </mat-form-field>
+              <br>
+              
+              <mat-form-field>
+                    <input matInput 
+                    [formControl]="endDate"
+                    [matDatepicker]="endPicker" 
+                    name="endDate" 
+                    placeholder="Effective End Date"/>
+                  
+                    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>               
+                    <mat-datepicker #endPicker></mat-datepicker>
+                  </mat-form-field>
+                  <br>
+
+        <mat-form-field>
+            <input matInput placeholder="Root Domain URL" formControlName="rootDomain" autocomplete="rootDomain">
+            <!-- <mat-error *ngIf="email.invalid && email.touched">
+                            Your email does not look right
+                        </mat-error> -->
         </mat-form-field>
-
-        <mat-form-field class="sm">
-            <input matInput placeholder="line" formControlName="line">
-        </mat-form-field>
-
-    </div>
-
-    <h4>Home Phone</h4>
-
-    <div formGroupName="homePhone">
-
-        <mat-form-field class="xs">
-            <input matInput placeholder="area" formControlName="area">
-        </mat-form-field>
-
-        <mat-form-field class="xs">
-            <input matInput placeholder="prefix" formControlName="prefix">
-        </mat-form-field>
-
-        <mat-form-field class="sm">
-            <input matInput placeholder="line" formControlName="line">
-        </mat-form-field>
-
-    </div>
+        <br>
 
 
-</form>
+
+
+        <!-- TenantTaxnmyName: <br><input type="text" id="tenantName2"> <br>
+        Effective Start Date: <br><input type="text" id="startDate2"> <br>
+        Effective End Date: <br><input type="text" id="endDate2"> <br>
+        Root Domain URL: <br><input type="text" id="rootDomain2"> <br> -->
+        <mat-dialog-actions>
+
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-raised-button>Add</button>
+        </mat-dialog-actions>
+
+    </form>
+</mat-dialog-content>

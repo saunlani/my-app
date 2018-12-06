@@ -13,7 +13,9 @@
           font-size: 12px; "
           (click) ="delete()">
           X</button>
-          
+          <button mat-raised-button (click)="openAddDialog('Add Account')">Add Account(Child)</button>
+          <button mat-raised-button (click)="openAddDialog('Add Tenant')">Add Tenant(Sibling)</button>
+
           <button class="addAccountButton" 
                style="cursor: pointer; 
                text-indent: -3.5px; 
@@ -129,4 +131,4 @@ pageSize=20
 <button style="float: right;" onclick="addTenantDialog.close()">Cancel</button>
 </dialog>
 <br>
-<button mat-raised-button (click)="openDialog()">Open</button>
+
